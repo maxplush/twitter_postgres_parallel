@@ -101,8 +101,6 @@ def insert_tweet(connection,tweet):
     if res.first() is not None:
         return
 
-    if connection.in_transaction():
-        connection.commit()
 
     # insert tweet within a transaction;
     # this ensures that a tweet does not get "partially" loaded
