@@ -11,7 +11,7 @@ BEGIN;
  * inside of a tweet someone else's tweet.
  */
 CREATE TABLE users (
-    id_users BIGINT PRIMARY KEY,
+    id_users BIGINT NOT NULL,
     created_at TIMESTAMPTZ,
     updated_at TIMESTAMPTZ,
     url TEXT,
@@ -26,14 +26,13 @@ CREATE TABLE users (
     location TEXT,
     description TEXT,
     withheld_in_countries VARCHAR(2)[],
-    FOREIGN KEY (id_urls) REFERENCES urls(id_urls) DEFERRABLE INITIALLY DEFERRED
 );
 
 /*
  * Tweets may be entered in hydrated or unhydrated form.
  */
 CREATE TABLE tweets (
-    id_tweets BIGINT PRIMARY KEY,
+    id_tweets BIGINT NOT NULL,
     id_users BIGINT,
     created_at TIMESTAMPTZ,
     in_reply_to_status_id BIGINT,
@@ -51,8 +50,6 @@ CREATE TABLE tweets (
     lang TEXT,
     place_name TEXT,
     geo geometry,
-    FOREIGN KEY (id_users) REFERENCES users(id_users) DEFERRABLE INITIALLY DEFERRED,
-    FOREIGN KEY (in_reply_to_user_id) REFERENCES users(id_users) DEFERRABLE INITIALLY DEFERRED
 
     -- NOTE:
     -- We do not have the following foreign keys because they would require us
@@ -66,9 +63,6 @@ CREATE INDEX tweets_index_withheldincountries ON tweets USING gin(withheld_in_co
 CREATE TABLE tweet_urls (
     id_tweets BIGINT,
     url TEXT,
-    PRIMARY KEY (id_tweets, id_urls),
-    FOREIGN KEY (id_tweets) REFERENCES tweets(id_tweets) DEFERRABLE INITIALLY DEFERRED,
-    FOREIGN KEY (id_urls) REFERENCES urls(id_urls) DEFERRABLE INITIALLY DEFERRED
 );
 
 
