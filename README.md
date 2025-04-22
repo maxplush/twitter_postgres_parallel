@@ -278,11 +278,11 @@ You should notice that parallelism achieves a nearly (but not quite) 10x speedup
 
 Ensure that your runtimes on the lambda server are recorded below.
 
-|                        | elapsed time (sequential) | elapsed time (parallel)   |
-| -----------------------| ------------------------- | ------------------------- |
-| `pg_normalized`        |                           |                           | 
-| `pg_normalized_batch`  |                           |                           | 
-| `pg_denormalized`      |                           |                           | 
+|                        | Elapsed Time (Sequential) | Elapsed Time (Parallel)   |
+|------------------------|---------------------------|---------------------------|
+| `pg_normalized`        | 8m33.324s                 | 0m9.402s                  |
+| `pg_normalized_batch`  | 3m6.525s                  | 0m21.414s                 |
+| `pg_denormalized`      | 0m23.508s                 | 0m3.528s                  |
 
 Then upload a link to your forked github repo on sakai.
 
